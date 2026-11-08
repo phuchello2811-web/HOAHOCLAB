@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="vi" style="margin:0;padding:0;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hóa Học Thông Minh — Trang học hóa tương tác</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+(function(){
+  var s = document.createElement('style');
+  s.textContent = ':root{--bg:#faf9f4;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#297a2e;--accent-soft:rgba(41,122,46,.14);--accent2:#d97706;--accent2-soft:rgba(217,119,6,.14);--border:rgba(15,23,42,.08)}'
+  +'.reveal{opacity:0;transform:translateY(20px);animation:fadeUp .6s ease forwards}.reveal:nth-child(2){animation-delay:.1s}.reveal:nth-child(3){animation-delay:.2s}.reveal:nth-child(4){animation-delay:.3s}.reveal:nth-child(5){animation-delay:.4s}.reveal:nth-child(6){animation-delay:.5s}@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}'
+  +'.card-hover{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}.card-hover:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.08);border-color:var(--accent)}'
+  +'.grade-tab{padding:10px 22px;border-radius:999px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:all .2s ease;font-size:15px}'
+  +'.grade-tab:hover{border-color:var(--accent);color:var(--text)}'
+  +'.grade-tab.active{background:var(--accent-soft);border-color:var(--accent);color:var(--text);box-shadow:0 0 0 1px var(--accent)}'
+  +'.lesson-item{border:1px solid var(--border);border-radius:14px;background:var(--card);margin-bottom:10px;overflow:hidden;transition:border-color .2s ease}'
+  +'.lesson-item.open{border-color:var(--accent)}'
+  +'.lesson-head{padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;user-select:none}'
+  +'.lesson-head:hover{background:var(--accent-soft)}'
+  +'.lesson-chev{transition:transform .25s ease;color:var(--accent);flex-shrink:0}'
+  +'.lesson-item.open .lesson-chev{transform:rotate(180deg)}'
+  +'.lesson-body{padding:0 20px 18px 20px;font-size:14.5px;line-height:1.7;color:var(--text)}'
+  +'.lesson-body ul{padding-left:18px;margin:8px 0}'
+  +'.lesson-body li{margin-bottom:5px}'
+  +'.formula-box{background:var(--accent2-soft);border-left:3px solid var(--accent2);padding:8px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-family:monospace;font-size:13.5px}'
+  +'.elem-tile{border:1px solid var(--border);border-radius:10px;background:var(--card);padding:10px 6px;text-align:center;cursor:pointer;transition:all .18s ease}'
+  +'.elem-tile:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-2px)}'
+  +'.elem-tile.active{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 1px var(--accent)}'
+  +'.quiz-option{border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:8px;cursor:pointer;transition:all .18s ease;font-size:14.5px;background:var(--card)}'
+  +'.quiz-option:hover{border-color:var(--accent)}'
+  +'.quiz-option.selected{border-color:var(--accent);background:var(--accent-soft)}'
+  +'.quiz-option.correct{border-color:#15803d;background:#dcfce7;color:#14532d;font-weight:600}'
+  +'.quiz-option.wrong{border-color:#b91c1c;background:#fee2e2;color:#7f1d1d}'
+  +'.nav-pill{padding:8px 16px;border-radius:999px;font-size:13.5px;font-weight:600;color:var(--muted);border:1px solid transparent;transition:all .2s ease;cursor:pointer;text-decoration:none}'
+  +'.nav-pill:hover{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}'
+  +'.exp-step{display:flex;gap:12px;margin-bottom:10px}'
+  +'.exp-num{width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}'
+  +'@keyframes bubble{0%{transform:translateY(0);opacity:.7}100%{transform:translateY(-40px);opacity:0}}.bubble{animation:bubble 2.4s ease-in infinite}'
+  ;
+  document.head.appendChild(s);
+})();
+</script>
+</head>
+<body style="margin:0;padding:0;">
+<div style="background-color:transparent;box-sizing:border-box;">
+  <div style="color:var(--text);font-family:'Baloo 2',cursive;background:radial-gradient(900px 400px at 85% -5%, var(--accent-soft), transparent 60%), var(--bg);">
+    <div class="max-w-5xl mx-auto px-5 py-10">
+
+      <!-- ============ HERO ============ -->
+      <div class="reveal mb-8" style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;">
+        <div style="flex:1 1 320px;min-width:280px;">
+          <div style="display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);border:1px solid var(--accent);padding:5px 14px;border-radius:999px;margin-bottom:14px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><path d="M9 3h6"/><path d="M10 3v6L4.5 19a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 9V3"/><path d="M7 15h10"/></svg>
+            <span style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)">Học hóa dễ hơn</span>
+          </div>
+          <h1 style="font-size:clamp(30px,5vw,46px);font-weight:800;line-height:1.12;letter-spacing:-.02em;margin:0 0 12px;">
+            Hóa Học <span style="background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">Thông Minh</span>
+          </h1>
+          <p style="color:var(--muted);font-size:16px;line-height:1.7;max-width:520px;margin:0 0 18px;">
+            Trang học hóa học tương tác dành cho học sinh THPT. Lý thuyết cô đọng, công thức trọng tâm, máy tính mol, tra cứu nguyên tố và bài trắc nghiệm — tất cả trong một chỗ.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <a href="#khoahoc" class="nav-pill" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:10px 22px;">Bắt đầu học</a>
+            <a href="#tracnghiem" class="nav-pill" style="background:var(--card);border:1px solid var(--border);color:var(--text);font-size:14px;padding:10px 22px;">Làm bài kiểm tra</a>
+          </div>
+        </div>
+        <!-- Decorative flask SVG -->
+        <div style="flex:0 0 auto;width:200px;height:200px;position:relative;">
+          <svg viewBox="0 0 200 200" width="200" height="200">
+            <circle cx="40" cy="50" r="6" fill="var(--accent2)" opacity=".5"/>
+            <circle cx="165" cy="40" r="4" fill="var(--accent)" opacity=".5"/>
+            <circle cx="175" cy="90" r="5" fill="var(--accent2)" opacity=".4"/>
+            <line x1="40" y1="50" x2="60" y2="70" stroke="var(--accent)" stroke-width="2" opacity=".4"/>
+            <line x1="165" y1="40" x2="145" y2="65" stroke="var(--accent2)" stroke-width="2" opacity=".4"/>
+            <path d="M80 25 h40 v10 h-5 l22 55 a30 30 0 1 1 -74 0 l22 -55 h-5 z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="3"/>
+            <path d="M68 110 h64 a30 30 0 0 1 -64 0 z" fill="var(--accent)" opacity=".35"/>
+            <circle class="bubble" cx="88" cy="135" r="4" fill="#fff" opacity=".8" style="animation-delay:0s"/>
+            <circle class="bubble" cx="105" cy="140" r="3" fill="#fff" opacity=".8" style="animation-delay:.8s"/>
+            <circle class="bubble" cx="118" cy="132" r="3.5" fill="#fff" opacity=".8" style="animation-delay:1.5s"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- ============ NAV ============ -->
+      <div class="reveal mb-10" style="display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:16px;">
+        <a href="#khoahoc" class="nav-pill">Khóa học</a>
+        <a href="#congthuc" class="nav-pill">Công thức &amp; Máy tính mol</a>
+        <a href="#nguyento" class="nav-pill">Nguyên tố</a>
+        <a href="#thinghiem" class="nav-pill">Thí nghiệm</a>
+        <a href="#tracnghiem" class="nav-pill">Trắc nghiệm</a>
+      </div>
+
+      <!-- ============ KHOA HOC / TABS + ACCORDION ============ -->
+      <div id="khoahoc" class="reveal mb-14">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <h2 style="font-size:24px;font-weight:700;margin:0;">Chương trình học theo lớp</h2>
+        </div>
+        <p style="color:var(--muted);font-size:14px;margin:4px 0 18px;">Chọn lớp để xem danh sách bài. Nhấn vào mỗi bài để mở nội dung tóm tắt.</p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;">
+          <button class="grade-tab active" data-grade="10">Lớp 10</button>
+          <button class="grade-tab" data-grade="11">Lớp 11</button>
+          <button class="grade-tab" data-grade="12">Lớp 12</button>
+        </div>
+
+        <div id="courses">
+          <!-- Lop 10 -->
+          <div class="grade-panel" id="panel-10">
+            <div class="lesson-item open">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 1 · Cấu tạo nguyên tử</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:block;">
+                <ul>
+                  <li><strong>Số hiệu nguyên tử Z</strong> = số proton = số electron (nguyên tử trung hòa).</li>
+                  <li><strong>Khối lượng nguyên tử A</strong> = số proton (p) + số nơtron (n).</li>
+                  <li><strong>Đồng vị</strong>: các nguyên tử cùng Z, khác A (vd: <sup>1</sup>H, <sup>2</sup>H, <sup>3</sup>H).</li>
+                  <li>Cấu hình electron theo lớp K, L, M, N… (lớp tối đa 2n<sup>2</sup> electron).</li>
+                </ul>
+                <div class="formula-box">Nguyên tử: <sub>Z</sub><sup>A</sup>X &nbsp;→&nbsp; p = e = Z &nbsp;;&nbsp; n = A − Z</div>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 2 · Liên kết hóa học</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Liên kết ion</strong>: trao đổi electron — thường giữa kim loại và phi kim (vd: NaCl).</li>
+                  <li><strong>Liên kết cộng hóa trị</strong>: chia sẻ cặp electron — giữa các phi kim (vd: H<sub>2</sub>O, O<sub>2</sub>).</li>
+                  <li><strong>Liên kết kim loại</strong>: giữa các nguyên tử kim loại trong tinh thể kim loại.</li>
+                  <li><strong>Liên kết hidro</strong>: liên kết yếu giữa H (gắn với O/N/F) và nguyên tử khác.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 3 · Phản ứng hóa học</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Định luật bảo toàn khối lượng</strong>: tổng khối lượng chất tham gia = tổng khối lượng sản phẩm.</li>
+                  <li>Bốn loại phản ứng cơ bản: <strong>kết hợp, phân hủy, thế, trao đổi</strong>.</li>
+                  <li>Cân bằng phương trình: hệ tỉ lệ mol = hệ số cân bằng.</li>
+                </ul>
+                <div class="formula-box">Phản ứng thế: Fe + CuSO<sub>4</sub> → FeSO<sub>4</sub> + Cu</div>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 4 · Dung dịch &amp; nồng độ mol</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Nồng độ mol (C<sub>m</sub>)</strong>: số mol chất tan trong 1 lít dung dịch.</li>
+                  <li>Pha dung dịch: tính khối lượng chất tan cần lấy, hòa tan vào dung môi đến thể tích yêu cầu.</li>
+                  <li>Pha loãng: C<sub>1</sub>V<sub>1</sub> = C<sub>2</sub>V<sub>2</sub>.</li>
+                </ul>
+                <div class="formula-box">C<sub>m</sub> = n / V<sub>dd</sub> &nbsp;(mol/lít)</div>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 5 · Halogen &amp; nhóm oxi</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Clo (Cl<sub>2</sub>)</strong>: khí vàng lục, độc, mạnh về tính oxi hóa; điều chế bằng MnO<sub>2</sub> + HCl đặc.</li>
+                  <li><strong>Axit HCl</strong>: axit mạnh, tạo muối clorua; dùng để điều chế CO<sub>2</sub>, H<sub>2</sub>S…</li>
+                  <li><strong>Axit H<sub>2</sub>SO<sub>4</sub></strong>: axit mạnh, có tính háo nước (đặc), tính oxi hóa (đặc, nóng).</li>
+                  <li><strong>Oxi (O<sub>2</sub>)</strong>: duy trì sự cháy; điều chế từ KMnO<sub>4</sub> hoặc KClO<sub>3</sub> (xúc tác MnO<sub>2</sub>).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lop 11 -->
+          <div class="grade-panel" id="panel-11" style="display:none;">
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 1 · Tốc độ &amp; cân bằng phản ứng</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Tốc độ phản ứng</strong> v = ΔC / Δt (mol/lít·giây).</li>
+                  <li>Yếu tố ảnh hưởng: nồng độ, nhiệt độ (mỗi 10°C tốc độ tăng 2–4 lần), áp suất (khí), diện tích bề mặt, xúc tác.</li>
+                  <li><strong>Cân bằng hóa học</strong>: trạng thái thuận nghịch, v<sub>thuận</sub> = v<sub>nghịch</sub>.</li>
+                  <li><strong>Nguyên lý Le Chatelier</strong>: cân bằng chuyển dịch chống lại tác động bên ngoài.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 2 · Dung dịch điện li &amp; pH</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Chất điện li mạnh</strong>: điện li hoàn toàn (HCl, H<sub>2</sub>SO<sub>4</sub>, NaOH, muối tan).</li>
+                  <li><strong>Chất điện li yếu</strong>: điện li một phần (CH<sub>3</sub>COOH, H<sub>2</sub>S, NH<sub>3</sub>…).</li>
+                  <li>Nước điện li rất yếu: [H<sup>+</sup>] = [OH<sup>−</sup>] = 10<sup>−7</sup> M ở 25°C.</li>
+                  <li>Môi trường: pH &lt; 7 axit, pH = 7 trung tính, pH &gt; 7 bazơ.</li>
+                </ul>
+                <div class="formula-box">pH = −log[H<sup>+</sup>] &nbsp;;&nbsp; [H<sup>+</sup>]·[OH<sup>−</sup>] = 10<sup>−14</sup></div>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 3 · Muối &amp; sự thủy phân</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li>Muối của <strong>axit mạnh + bazơ mạnh</strong>: không thủy phân, môi trường trung tính (NaCl).</li>
+                  <li>Muối của <strong>axit yếu + bazơ mạnh</strong>: thủy phân, môi trường <strong>bazơ</strong> (CH<sub>3</sub>COONa).</li>
+                  <li>Muối của <strong>axit mạnh + bazơ yếu</strong>: thủy phân, môi trường <strong>axit</strong> (NH<sub>4</sub>Cl).</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 4 · Kim loại &amp; dãy điện hóa</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Nhôm (Al)</strong>: lưỡng tính — tác dụng được với cả axit và dung dịch bazơ mạnh.</li>
+                  <li><strong>Sắt</strong>: có 2 mức oxi hóa phổ biến Fe<sup>2+</sup> (xanh nhạt) và Fe<sup>3+</sup> (vàng nâu).</li>
+                  <li><strong>Kim loại kiềm</strong> (Na, K): mạnh về tính khử, phản ứng mạnh với nước tạo bazơ + H<sub>2</sub>.</li>
+                  <li><strong>Dãy điện hóa</strong>: kim loại đứng trước đẩy ion kim loại đứng sau ra khỏi dung dịch muối.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 5 · Hidrocacbon</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Ankan</strong> C<sub>n</sub>H<sub>2n+2</sub>: liên kết đơn, phản ứng thế (với halogen, có ánh sáng).</li>
+                  <li><strong>Anken</strong> C<sub>n</sub>H<sub>2n</sub>: có liên kết đôi, phản ứng cộng (Br<sub>2</sub> mất màu nhanh).</li>
+                  <li><strong>Ankin</strong> C<sub>n</sub>H<sub>2n−2</sub>: có liên kết ba; ankin đầu mút tạo kết tủa vàng với AgNO<sub>3</sub>/NH<sub>3</sub>.</li>
+                  <li><strong>Aren</strong> (C<sub>6</sub>H<sub>6</sub>): vòng benzen, phản ứng thế, không làm mất màu Br<sub>2</sub>.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lop 12 -->
+          <div class="grade-panel" id="panel-12" style="display:none;">
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 1 · Dẫn xuất hữu cơ cơ bản</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Ancol</strong> R−OH: tác dụng với Na tạo H<sub>2</sub>; ancol bậc 1 oxi hóa → andehit.</li>
+                  <li><strong>Andehit</strong> R−CHO: phản ứng tráng bạc (AgNO<sub>3</sub>/NH<sub>3</sub>); oxi hóa → axit.</li>
+                  <li><strong>Axit cacboxylic</strong> R−COOH: tính axit yếu, tác dụng với bazơ, muối cacbonat, ancol (tạo este).</li>
+                  <li><strong>Este</strong> R−COO−R′: thủy phân trong môi trường axit/bazơ (xà phòng hóa với bazơ).</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 2 · Gluxit · Lipid · Protein</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Glucose</strong> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>: có nhóm andehit, phản ứng tráng bạc.</li>
+                  <li><strong>Tinh bột</strong>: gặp I<sub>2</sub> tạo màu xanh đặc trưng; thủy phân hoàn toàn → glucose.</li>
+                  <li><strong>Lipid</strong>: este của glixerol và axit béo; thủy phân trong môi trường bazơ → xà phòng + glixerol.</li>
+                  <li><strong>Protein</strong>: polime của amino axit; phản ứng màu biuret (tím) với Cu(OH)<sub>2</sub>/NaOH; thủy phân → amino axit.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 3 · Polime &amp; vật liệu</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Polime</strong>: phân tử khối lượng lớn tạo bởi các mắt xích đơn giản (monome).</li>
+                  <li>Nhựa thông dụng: PE (từ etilen), PP (propen), PVC (vinyl clorua), PET.</li>
+                  <li><strong>Sợi</strong>: tự nhiên (tơ, bông, len) và nhân tạo (visco, axetat); tổng hợp (polyeste, polyamid).</li>
+                  <li><strong>Cao su</strong>: tự nhiên (polyisopren) và tổng hợp; lưu hóa với lưu huỳnh tăng độ bền.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 4 · Kim loại, hợp kim &amp; ăn mòn</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li><strong>Hợp kim</strong>: hỗn hợp kim loại (hoặc kim loại + phi kim) có tính chất tốt hơn kim loại thuần (thép, gang, đồng thau).</li>
+                  <li><strong>Ăn mòn hóa học</strong>: tác dụng trực tiếp với O<sub>2</sub>, chất oxi hóa.</li>
+                  <li><strong>Ăn mòn điện hóa</strong>: xảy ra khi có điện cực khác nhau và môi trường dẫn điện (phổ biến nhất).</li>
+                  <li>Bảo vệ: mạ kim loại, sơn, phốt phát, hóa, dùng điện cực phụ (thanh Mg, Zn gắn vào thùng tàu).</li>
+                </ul>
+              </div>
+            </div>
+            <div class="lesson-item">
+              <div class="lesson-head"><span style="font-weight:600;">Bài 5 · Tổng hợp &amp; ôn thi THPT</span><svg class="lesson-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></div>
+              <div class="lesson-body" style="display:none;">
+                <ul>
+                  <li>Đầu điểm: dạng bài <strong>tính theo phương trình</strong> (định luật bảo toàn nguyên tố, bảo toàn electron).</li>
+                  <li>Dạng <strong>hỗn hợp</strong>: đặt ẩn số mol, lập hệ phương trình theo khối lượng, theo electron.</li>
+                  <li>Dạng <strong>nhận biết</strong>: dùng thuốc thử đặc trưng (quỳ tím, dung dịch kiềm, AgNO<sub>3</sub>/NH<sub>3</sub>, Br<sub>2</sub>…).</li>
+                  <li>Luyện đề theo cấu trúc mới: 40 câu trắc nghiệm, 90 phút — phân bổ thời gian hợp lý.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ CONG THUC + MAY TINH MOL ============ -->
+      <div id="congthuc" class="reveal mb-14">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="10" y2="11"/><line x1="12" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="10" y2="15"/><line x1="12" y1="15" x2="16" y2="15"/></svg>
+          <h2 style="font-size:24px;font-weight:700;margin:0;">Công thức trọng tâm &amp; Máy tính mol</h2>
+        </div>
+        <p style="color:var(--muted);font-size:14px;margin:4px 0 18px;">Bốn công thức vàng của hóa phổ thông + công cụ tính số mol tức thì.</p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:16px;">
+          <!-- Formula cards -->
+          <div style="flex:1 1 280px;min-width:260px;display:flex;flex-direction:column;gap:12px;">
+            <div class="card-hover" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;">
+              <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Số mol theo khối lượng</div>
+              <div style="font-family:monospace;font-size:16px;font-weight:600;">n = m / M</div>
+              <div style="font-size:12.5px;color:var(--muted);margin-top:3px;">m (gam), M (g/mol)</div>
+            </div>
+            <div class="card-hover" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;">
+              <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Số mol theo thể tích khí (đktc)</div>
+              <div style="font-family:monospace;font-size:16px;font-weight:600;">n = V / 22,4</div>
+              <div style="font-size:12.5px;color:var(--muted);margin-top:3px;">V (lít), 22,4 lít/mol ở đktc</div>
+            </div>
+            <div class="card-hover" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;">
+              <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Số hạt</div>
+              <div style="font-family:monospace;font-size:16px;font-weight:600;">N = n × 6,022×10<sup>23</sup></div>
+              <div style="font-size:12.5px;color:var(--muted);margin-top:3px;">Hằng số Avogadro N<sub>A</sub></div>
+            </div>
+            <div class="card-hover" style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;">
+              <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">Nồng độ mol</div>
+              <div style="font-family:monospace;font-size:16px;font-weight:600;">C<sub>m</sub> = n / V<sub>dd</sub></div>
+              <div style="font-size:12.5px;color:var(--muted);margin-top:3px;">V<sub>dd</sub> (lít) — thể tích dung dịch</div>
+            </div>
+          </div>
+
+          <!-- Mole calculator -->
+          <div class="card-hover" style="flex:1 1 300px;min-width:280px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.05);">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+              <span style="font-weight:700;font-size:16px;">Máy tính mol</span>
+            </div>
+            <label style="font-size:13px;color:var(--muted);font-weight:600;">Chọn chất</label>
+            <select id="sub-select" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin:6px 0 12px;font-family:inherit;font-size:14px;background:var(--bg);color:var(--text);">
+              <option value="18" data-gas="0">H₂O (nước) — M = 18</option>
+              <option value="58.5" data-gas="0">NaCl (muối ăn) — M = 58,5</option>
+              <option value="98" data-gas="0">H₂SO₄ (axit sulfuric) — M = 98</option>
+              <option value="40" data-gas="0">NaOH (natri hidroxit) — M = 40</option>
+              <option value="36.5" data-gas="1">HCl (axit clohidric, khí) — M = 36,5</option>
+              <option value="100" data-gas="0">CaCO₃ (đá vôi) — M = 100</option>
+              <option value="44" data-gas="1">CO₂ (khí cacbonic) — M = 44</option>
+              <option value="32" data-gas="1">O₂ (khí oxi) — M = 32</option>
+              <option value="160" data-gas="0">CuSO₄ (đồng sulfat) — M = 160</option>
+              <option value="158" data-gas="0">KMnO₄ (kali pemanganat) — M = 158</option>
+              <option value="46" data-gas="0">C₂H₅OH (ancol etylic) — M = 46</option>
+              <option value="16" data-gas="1">CH₄ (metan, khí) — M = 16</option>
+            </select>
+            <label style="font-size:13px;color:var(--muted);font-weight:600;">Khối lượng (gam)</label>
+            <input id="mass-input" type="number" min="0" step="0.1" placeholder="VD: 36" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin:6px 0 14px;font-family:inherit;font-size:14px;background:var(--bg);color:var(--text);box-sizing:border-box;">
+            <div id="mol-result" style="background:var(--accent-soft);border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.9;min-height:60px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ NGUYEN TO ============ -->
+      <div id="nguyento" class="reveal mb-14">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>
+          <h2 style="font-size:24px;font-weight:700;margin:0;">Tra cứu 20 nguyên tố đầu</h2>
+        </div>
+        <p style="color:var(--muted);font-size:14px;margin:4px 0 18px;">Nhấn vào một nguyên tố để xem chi tiết: số hiệu, khối lượng, cấu hình electron và nhóm tính chất.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:8px;margin-bottom:14px;" id="elem-grid"></div>
+        <div id="elem-detail" style="background:var(--card);border:1px solid var(--accent);border-radius:14px;padding:18px 20px;min-height:90px;box-shadow:0 0 0 1px var(--accent-soft);">
+          <div style="color:var(--muted);font-size:14px;">Chọn một nguyên tố ở trên để xem thông tin chi tiết.</div>
+        </div>
+      </div>
+
+      <!-- ============ THI NGHIEM ============ -->
+      <div id="thinghiem" class="reveal mb-14">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="2"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/></svg>
+          <h2 style="font-size:24px;font-weight:700;margin:0;">Thí nghiệm cơ bản</h2>
+        </div>
+        <p style="color:var(--muted);font-size:14px;margin:4px 0 18px;">Các thí nghiệm thường gặp trong chương trình — kèm lưu ý an toàn.</p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:16px;">
+          <div class="card-hover" style="flex:1 1 280px;min-width:260px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;">
+            <div style="font-weight:700;font-size:16px;margin-bottom:4px;color:var(--text);">Điện phân nước</div>
+            <div style="font-size:12.5px;color:var(--accent2);font-weight:600;margin-bottom:10px;">Mục đích: chứng minh nước tạo bởi H và O</div>
+            <div class="exp-step"><div class="exp-num">1</div><span style="font-size:13.5px;line-height:1.5;">Cho nước có thêm ít H<sub>2</sub>SO<sub>4</sub> loãng vào cốc điện phân, lắp 2 ống thu khí ngập nước.</span></div>
+            <div class="exp-step"><div class="exp-num">2</div><span style="font-size:13.5px;line-height:1.5;">Dòng điện một chiều: cực dương thu O<sub>2</sub>, cực âm thu H<sub>2</sub> (tỉ lệ thể tích 1:2).</span></div>
+            <div class="exp-step"><div class="exp-num">3</div><span style="font-size:13.5px;line-height:1.5;">Kiểm tra: que đóm bén sáng (O<sub>2</sub>); khí cháy với tiếng nổ nhỏ (H<sub>2</sub>).</span></div>
+          </div>
+          <div class="card-hover" style="flex:1 1 280px;min-width:260px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;">
+            <div style="font-weight:700;font-size:16px;margin-bottom:4px;color:var(--text);">Điều chế CO<sub>2</sub></div>
+            <div style="font-size:12.5px;color:var(--accent2);font-weight:600;margin-bottom:10px;">Mục đích: thu khí CO<sub>2</sub> và kiểm tra tính chất</div>
+            <div class="exp-step"><div class="exp-num">1</div><span style="font-size:13.5px;line-height:1.5;">Cho đá vôi (CaCO<sub>3</sub>) vào bình kiểu sinh, thêm HCl loãng qua phễu hạ thấp.</span></div>
+            <div class="exp-step"><div class="exp-num">2</div><span style="font-size:13.5px;line-height:1.5;">Thu khí bằng cách đẩy không khí (CO<sub>2</sub> nặng hơn không khí), ống dẫn khí đặt sâu xuống đáy bình.</span></div>
+            <div class="exp-step"><div class="exp-num">3</div><span style="font-size:13.5px;line-height:1.5;">Sục vào dung dịch vôi trong Ca(OH)<sub>2</sub>: hiện tượng đục do tạo CaCO<sub>3</sub>.</span></div>
+          </div>
+          <div class="card-hover" style="flex:1 1 280px;min-width:260px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;">
+            <div style="font-weight:700;font-size:16px;margin-bottom:4px;color:var(--text);">Tinh thể CuSO<sub>4</sub></div>
+            <div style="font-size:12.5px;color:var(--accent2);font-weight:600;margin-bottom:10px;">Mục đích: tạo tinh thể ngậm nước màu xanh</div>
+            <div class="exp-step"><div class="exp-num">1</div><span style="font-size:13.5px;line-height:1.5;">Hòa CuSO<sub>4</sub> khan vào nước nóng đến bão hòa, khuấy đều.</span></div>
+            <div class="exp-step"><div class="exp-num">2</div><span style="font-size:13.5px;line-height:1.5;">Lọc nóng loại bỏ tạp chất không tan, để dung dịch nguội từ từ.</span></div>
+            <div class="exp-step"><div class="exp-num">3</div><span style="font-size:13.5px;line-height:1.5;">Tinh thể CuSO<sub>4</sub>·5H<sub>2</sub>O màu xanh lam tách ra; hút khô bằng giấy lọc.</span></div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;background:var(--accent2-soft);border-left:4px solid var(--accent2);border-radius:0 12px 12px 0;padding:14px 18px;font-size:14px;line-height:1.7;">
+          <strong style="color:var(--accent2);">Lưu ý an toàn phòng thí nghiệm:</strong> mặc áo blouse, đeo kính bảo hộ; không ngửi trực tiếp khí độc (vẫy nhẹ); axit đặc đổ từ từ vào nước (không làm ngược lại); rửa tay sạch sau khi làm thí nghiệm.
+        </div>
+      </div>
+
+      <!-- ============ TRAC NGHIEM ============ -->
+      <div id="tracnghiem" class="reveal mb-14">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <h2 style="font-size:24px;font-weight:700;margin:0;">Kiểm tra nhanh — 5 câu trắc nghiệm</h2>
+        </div>
+        <p style="color:var(--muted);font-size:14px;margin:4px 0 18px;">Chọn đáp án rồi nhấn "Chấm điểm". Đáp án đúng sẽ được tô xanh.</p>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;">
+          <div id="quiz-list"></div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;">
+            <button id="quiz-submit" style="padding:11px 26px;border-radius:12px;font-weight:700;font-size:15px;background:var(--accent);color:#fff;border:1px solid var(--accent);cursor:pointer;font-family:inherit;">Chấm điểm</button>
+            <button id="quiz-reset" style="padding:11px 26px;border-radius:12px;font-weight:600;font-size:15px;background:var(--card);color:var(--muted);border:1px solid var(--border);cursor:pointer;font-family:inherit;">Làm lại</button>
+          </div>
+          <div id="quiz-score" style="display:none;margin-top:16px;padding:14px 18px;border-radius:12px;background:var(--accent-soft);border:1px solid var(--accent);font-size:16px;font-weight:600;color:var(--text);"></div>
+        </div>
+      </div>
+
+      <!-- ============ FOOTER ============ -->
+      <div class="reveal" style="border-top:1px solid var(--border);padding-top:20px;text-align:center;">
+        <p style="color:var(--muted);font-size:13px;margin:0 0 4px;">Hóa Học Thông Minh · Trang học tập tương tác</p>
+        <p style="color:var(--muted);font-size:12px;margin:0;">Nội dung biên soạn theo chương trình Giáo dục phổ thông Việt Nam · Học tốt nhé!</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---- Grade tabs ----
+  var tabs = document.querySelectorAll('.grade-tab');
+  tabs.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      tabs.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var g = btn.getAttribute('data-grade');
+      document.querySelectorAll('.grade-panel').forEach(function(p){
+        p.style.display = (p.id === 'panel-'+g) ? 'block' : 'none';
+      });
+    });
+  });
+
+  // ---- Lesson accordion (delegated) ----
+  var courses = document.getElementById('courses');
+  courses.addEventListener('click', function(e){
+    var h = e.target.closest('.lesson-head');
+    if(!h) return;
+    var item = h.parentElement;
+    var body = item.querySelector('.lesson-body');
+    var isOpen = body.style.display === 'block';
+    document.querySelectorAll('.lesson-body').forEach(function(b){ b.style.display='none'; });
+    document.querySelectorAll('.lesson-item').forEach(function(i){ i.classList.remove('open'); });
+    if(!isOpen){ body.style.display='block'; item.classList.add('open'); }
+  });
+
+  // ---- Mole calculator ----
+  var sel = document.getElementById('sub-select');
+  var massInput = document.getElementById('mass-input');
+  var out = document.getElementById('mol-result');
+  function calcMol(){
+    var M = parseFloat(sel.value);
+    var isGas = sel.options[sel.selectedIndex].getAttribute('data-gas') === '1';
+    var mass = parseFloat(massInput.value);
+    if(isNaN(mass) || mass < 0){
+      out.innerHTML = '<span style="color:var(--muted)">Nhập khối lượng (gam) để xem kết quả tính toán.</span>';
+      return;
+    }
+    var n = mass / M;
+    var html = '<div><strong>Số mol n</strong> = m / M = ' + mass + ' / ' + M + ' = <span style="color:var(--accent);font-weight:700;font-size:16px;">' + n.toFixed(3) + ' mol</span></div>';
+    html += '<div><strong>Số hạt</strong> = n × N<sub>A</sub> ≈ ' + (n*6.022).toFixed(2) + ' × 10<sup>23</sup> hạt</div>';
+    if(isGas){
+      html += '<div><strong>Thể tích ở đktc</strong> = n × 22,4 = ' + (n*22.4).toFixed(2) + ' lít</div>';
+    }
+    out.innerHTML = html;
+  }
+  sel.addEventListener('change', calcMol);
+  massInput.addEventListener('input', calcMol);
+  calcMol();
+
+  // ---- Element grid + detail ----
+  var elements = [
+    {z:1,sym:'H',name:'Hydro',mass:'1,008',cfg:'1s<sup>1</sup>',group:'Phi kim',note:'Nguyên tố nhẹ nhất, tồn tại chủ yếu trong nước và hợp chất hữu cơ.'},
+    {z:2,sym:'He',name:'Heli',mass:'4,003',cfg:'1s<sup>2</sup>',group:'Khí hiếm',note:'Khí trơ, nhẹ, dùng bay khí cầu; không tạo hợp chất thông thường.'},
+    {z:3,sym:'Li',name:'Liti',mass:'6,94',cfg:'[He]2s<sup>1</sup>',group:'Kim loại kiềm',note:'Kim loại nhẹ nhất, dùng trong pin sạc.'},
+    {z:4,sym:'Be',name:'Berili',mass:'9,012',cfg:'[He]2s<sup>2</sup>',group:'Kim loại kiềm thổ',note:'Nhẹ, cứng, chịu nhiệt; độc.'},
+    {z:5,sym:'B',name:'Bo',mass:'10,81',cfg:'[He]2s<sup>2</sup>2p<sup>1</sup>',group:'Á kim',note:'Có trong axit boric, borax; cứng như kim cương ở dạng tinh thể.'},
+    {z:6,sym:'C',name:'Cacbon',mass:'12,01',cfg:'[He]2s<sup>2</sup>2p<sup>2</sup>',group:'Phi kim',note:'Nền tảng của hóa hữu cơ; các thù hình: than chì, kim cương, fullerene.'},
+    {z:7,sym:'N',name:'Nitơ',mass:'14,01',cfg:'[He]2s<sup>2</sup>2p<sup>3</sup>',group:'Phi kim',note:'Chiếm 78% không khí; thành phần của protein, axit nucleic.'},
+    {z:8,sym:'O',name:'Oxi',mass:'16,00',cfg:'[He]2s<sup>2</sup>2p<sup>4</sup>',group:'Phi kim',note:'Duy trì sự cháy và hô hấp; chiếm ~21% không khí.'},
+    {z:9,sym:'F',name:'Flo',mass:'19,00',cfg:'[He]2s<sup>2</sup>2p<sup>5</sup>',group:'Halogen',note:'Phi kim hoạt động mạnh nhất; ăn mòn thủy tinh.'},
+    {z:10,sym:'Ne',name:'Neon',mass:'20,18',cfg:'[He]2s<sup>2</sup>2p<sup>6</sup>',group:'Khí hiếm',note:'Khí trơ; phát sáng đỏ-cam trong đèn neon.'},
+    {z:11,sym:'Na',name:'Natri',mass:'22,99',cfg:'[Ne]3s<sup>1</sup>',group:'Kim loại kiềm',note:'Phản ứng mạnh với nước; có trong muối ăn NaCl.'},
+    {z:12,sym:'Mg',name:'Magie',mass:'24,31',cfg:'[Ne]3s<sup>2</sup>',group:'Kim loại kiềm thổ',note:'Đốt cháy phát sáng chói; thành phần diệp lục.'},
+    {z:13,sym:'Al',name:'Nhôm',mass:'26,98',cfg:'[Ne]3s<sup>2</sup>3p<sup>1</sup>',group:'Kim loại',note:'Lưỡng tính; nhẹ, bền, dùng làm khung xe, dây dẫn.'},
+    {z:14,sym:'Si',name:'Silic',mass:'28,09',cfg:'[Ne]3s<sup>2</sup>3p<sup>2</sup>',group:'Á kim',note:'Chất bán dẫn; thành phần cát, thủy tinh, bê tông.'},
+    {z:15,sym:'P',name:'Photpho',mass:'30,97',cfg:'[Ne]3s<sup>2</sup>3p<sup>3</sup>',group:'Phi kim',note:'Có trong xương, DNA; dạng trắng tự bốc cháy trong không khí.'},
+    {z:16,sym:'S',name:'Lưu huỳnh',mass:'32,06',cfg:'[Ne]3s<sup>2</sup>3p<sup>4</sup>',group:'Phi kim',note:'Rắn màu vàng; tạo H<sub>2</sub>S (mùi trứng thối) và H<sub>2</sub>SO<sub>4</sub>.'},
+    {z:17,sym:'Cl',name:'Clo',mass:'35,45',cfg:'[Ne]3s<sup>2</sup>3p<sup>5</sup>',group:'Halogen',note:'Khí vàng lục, độc; sát trùng nước máy; có trong muối ăn.'},
+    {z:18,sym:'Ar',name:'Argon',mass:'39,95',cfg:'[Ne]3s<sup>2</sup>3p<sup>6</sup>',group:'Khí hiếm',note:'Chiếm ~1% không khí; khí trơ dùng hàn kim loại.'},
+    {z:19,sym:'K',name:'Kali',mass:'39,10',cfg:'[Ar]4s<sup>1</sup>',group:'Kim loại kiềm',note:'Phản ứng dữ dội với nước; cần thiết cho cơ thể sống.'},
+    {z:20,sym:'Ca',name:'Canxi',mass:'40,08',cfg:'[Ar]4s<sup>2</sup>',group:'Kim loại kiềm thổ',note:'Thành phần xương, răng; đá vôi, vôi sống, thạch cao.'}
+  ];
+  var grid = document.getElementById('elem-grid');
+  var detail = document.getElementById('elem-detail');
+  var tiles = [];
+  elements.forEach(function(el, idx){
+    var t = document.createElement('div');
+    t.className = 'elem-tile';
+    t.setAttribute('data-idx', idx);
+    t.innerHTML = '<div style="font-size:10px;color:var(--muted);font-weight:600;">'+el.z+'</div>'
+      + '<div style="font-size:20px;font-weight:800;line-height:1.1;color:var(--accent);">'+el.sym+'</div>'
+      + '<div style="font-size:10.5px;color:var(--muted);margin-top:2px;">'+el.name+'</div>';
+    t.addEventListener('click', function(){
+      tiles.forEach(function(x){ x.classList.remove('active'); });
+      t.classList.add('active');
+      detail.innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;">'
+        + '<div style="width:70px;height:70px;border-radius:14px;background:var(--accent-soft);border:1px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;">'
+        + '<span style="font-size:10px;color:var(--muted);font-weight:600;">'+el.z+'</span>'
+        + '<span style="font-size:26px;font-weight:800;color:var(--accent);line-height:1;">'+el.sym+'</span>'
+        + '</div>'
+        + '<div style="flex:1;min-width:200px;">'
+        + '<div style="font-size:18px;font-weight:700;">'+el.name+' <span style="color:var(--muted);font-weight:500;font-size:14px;">· khối lượng M = '+el.mass+'</span></div>'
+        + '<div style="font-size:13.5px;margin-top:6px;line-height:1.7;"><strong>Nhóm:</strong> <span style="background:var(--accent2-soft);padding:2px 10px;border-radius:999px;font-weight:600;color:var(--accent2);">'+el.group+'</span> &nbsp; <strong>Cấu hình e:</strong> '+el.cfg+'</div>'
+        + '<div style="font-size:13.5px;margin-top:6px;line-height:1.6;color:var(--text);">'+el.note+'</div>'
+        + '</div></div>';
+    });
+    grid.appendChild(t);
+    tiles.push(t);
+  });
+
+  // ---- Quiz ----
+  var quizData = [
+    {q:'Nguyên tử oxi (O) có số hiệu nguyên tử Z bằng bao nhiêu?', opts:['6','8','16','32'], ans:1},
+    {q:'Công thức hóa học của axit sulfuric là?', opts:['HCl','HNO<sub>3</sub>','H<sub>2</sub>SO<sub>4</sub>','H<sub>3</sub>PO<sub>4</sub>'], ans:2},
+    {q:'Phản ứng nào sau đây thuộc loại phản ứng thế?', opts:['Đốt cháy metan trong oxi','Điện phân nước','Fe + CuSO<sub>4</sub> → FeSO<sub>4</sub> + Cu','NaOH + HCl → NaCl + H<sub>2</sub>O'], ans:2},
+    {q:'Khí nào làm đục dung dịch vôi trong (Ca(OH)<sub>2</sub>)?', opts:['O<sub>2</sub>','H<sub>2</sub>','CO<sub>2</sub>','N<sub>2</sub>'], ans:2},
+    {q:'Đơn chất nào dẫn điện tốt nhất ở nhiệt độ thường?', opts:['Lưu huỳnh','Sắt','Nước cất','Kính'], ans:1}
+  ];
+  var letters = ['A','B','C','D'];
+  var quizList = document.getElementById('quiz-list');
+  var selected = {};
+  quizData.forEach(function(item, qi){
+    var qid = 'q'+(qi+1);
+    var wrap = document.createElement('div');
+    wrap.style.marginBottom = '18px';
+    var qHtml = '<div style="font-weight:600;font-size:15px;margin-bottom:10px;"><span style="color:var(--accent);">Câu '+(qi+1)+'.</span> '+item.q+'</div>';
+    item.opts.forEach(function(opt, oi){
+      qHtml += '<div class="quiz-option" data-q="'+qid+'" data-v="'+oi+'"><span style="display:inline-block;width:22px;font-weight:700;color:var(--accent);">'+letters[oi]+'.</span> '+opt+'</div>';
+    });
+    wrap.innerHTML = qHtml;
+    quizList.appendChild(wrap);
+  });
+  quizList.addEventListener('click', function(e){
+    var opt = e.target.closest('.quiz-option');
+    if(!opt) return;
+    var q = opt.getAttribute('data-q');
+    var v = opt.getAttribute('data-v');
+    selected[q] = v;
+    quizList.querySelectorAll('.quiz-option[data-q="'+q+'"]').forEach(function(o){ o.classList.remove('selected'); });
+    opt.classList.add('selected');
+  });
+  document.getElementById('quiz-submit').addEventListener('click', function(){
+    var score = 0;
+    quizData.forEach(function(item, qi){
+      var qid = 'q'+(qi+1);
+      var opts = quizList.querySelectorAll('.quiz-option[data-q="'+qid+'"]');
+      opts.forEach(function(o){
+        o.classList.remove('correct','wrong');
+        var v = parseInt(o.getAttribute('data-v'),10);
+        if(v === item.ans) o.classList.add('correct');
+        else if(selected[qid] !== undefined && parseInt(selected[qid],10) === v) o.classList.add('wrong');
+      });
+      if(parseInt(selected[qid],10) === item.ans) score++;
+    });
+    var scoreBox = document.getElementById('quiz-score');
+    var msg = score === quizData.length ? 'Xuất sắc! ' : score >= 3 ? 'Khá tốt! ' : 'Cần ôn lại nhé! ';
+    scoreBox.innerHTML = msg + 'Bạn trả lời đúng <strong>'+score+' / '+quizData.length+'</strong> câu.';
+    scoreBox.style.display = 'block';
+  });
+  document.getElementById('quiz-reset').addEventListener('click', function(){
+    selected = {};
+    quizList.querySelectorAll('.quiz-option').forEach(function(o){ o.classList.remove('selected','correct','wrong'); });
+    document.getElementById('quiz-score').style.display = 'none';
+  });
+})();
+</script>
+</body>
+</html>
